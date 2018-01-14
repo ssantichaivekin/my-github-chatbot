@@ -15,7 +15,7 @@
 # "What are the repos that :username have?"
 
 list_repo () {
-  curl -s http://api.github.com/users/${1}/repos | jq -r '[].name'
+  curl -s https://api.github.com/users/${1}/repos | jq -r '.[].name'
 }
 
 count_repo () {
@@ -40,6 +40,10 @@ do
   [[ $input == *"how"*  ]] && how=true  || how=false
   [[ $input == *"I"* ]]    && me=true   || me=false
   
+  # debug
+  # TODO : redirect this to standard error
+  echo ">>" $help $what $how $me
+
   # Get the username
   if $me
   then
